@@ -1,15 +1,15 @@
-def print_parameter(num):
-    print(num)
+def n(num):
+    print(num, end='')
 
 
-print_parameter(8)
-print_parameter(8)
-print_parameter(0)
-print_parameter(0)
-print_parameter(5)
-print_parameter(5)
-print_parameter(5)
-print_parameter(3)
-print_parameter(5)
-print_parameter(3)
-print_parameter(5)
+n(8)
+n(8)
+n(0)
+n(0)
+n(5)
+n(5)
+n(5)
+n(3)
+n(5)
+n(3)
+n(5)
