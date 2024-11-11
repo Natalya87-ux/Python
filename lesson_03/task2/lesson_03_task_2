@@ -1,15 +1,12 @@
 from smartphone import Smartphone
 
-phone1 = Smartphone
-phone2 = Smartphone
-phone3 = Smartphone
-phone4 = Smartphone
-phone1 = ("Apple", "15 mini", "+79990076545")
-phone2 = ("Vivo", "V21e", "+79990062212")
-phone3 = ("Honor", "30i", "+79050062212")
-phone4 = ("Samsung", "S10", "+79990555552")
+catalog = [
+    Smartphone("Apple", "iPhone 13", "+79111234567"),
+    Smartphone("Samsung", "Galaxy S21", "+79112233445"),
+    Smartphone("Xiaomi", "Redmi Note 10", "+79113332211"),
+    Smartphone("Huawei", "P40", "+79114445566"),
+    Smartphone("OnePlus", "8 Pro", "+79115556677")
+    ]
 
-catalog = [phone1, phone2, phone3, phone4]
-
-for phones in catalog:
-    print(*phones)
+for phone in catalog:
+    print(phone)
