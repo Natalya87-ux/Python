@@ -1,15 +1,26 @@
+import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from Pages.InventoryPageInternetShop import InventoryPageInternetShop
 from Pages.CartPageInternetShop import CartPageInternetShop
 from Pages.CheckoutPageInternetShop import CheckoutPageInternetShop
-from Pages.CheckoutOverviewPageInternetShop import CheckoutOverviewPageInternetShop
+from Pages.CheckoutOverviewPageInternetShop import OverviewPage
 from Pages.MainPageInternetShop import MainPageInternetShop
 
-def testCalc():
+
+@pytest.fixture(scope="module")
+def driver():
+    options = Options()
+    options.add_argument("--ignore-certificate-errors")
+    driver = webdriver.Chrome(options=options)
+    yield driver
+    driver.quit()
+
+
+def test_Calc():
     options = Options()
     options.add_argument('--ignore-certificate-errors')
-    driver = webdriver.Chrome(options) 
+    driver = webdriver.Chrome(options)
     shop = MainPageInternetShop(driver)
     shop.set_cookie_policy()
     shop.wait()
@@ -26,9 +37,8 @@ def testCalc():
     shop.set_cookie_policy()
     shop.wait()
     shop.Continuepress()
-    shop = CheckoutOverviewPageInternetShop(driver)
+    shop = OverviewPage(driver)
     shop.set_cookie_policy()
     shop.wait()
-    shop.Equal()
-
-    
+    txt = shop.Equal()
+    assert txt == 'Total: $58.29', 'Error!'

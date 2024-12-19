@@ -1,22 +1,23 @@
+import pytest
 from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from Pages.MainPageСalculator import MainPageСalculator
+from Pages.MainPageСalculator import MainPageCalculator
 from selenium.webdriver.chrome.options import Options
 
 
-
-def testCalc():
+@pytest.fixture(scope="module")
+def driver():
     options = Options()
-    options.add_argument('--ignore-certificate-errors')
-    driver = webdriver.Chrome(options) 
-    calc = MainPageСalculator(driver)
+    options.add_argument("--ignore-certificate-errors")
+    driver = webdriver.Chrome(options=options)
+    yield driver
+    driver.quit()
+
+
+def test_calculator(driver):
+    calc = MainPageCalculator(driver)
     calc.set_cookie_policy()
-    calc.wait()
+    calc.wait_for_elements()
     calc.enter_time_delay(45)
     calc.enter_expression()
-    calc.check_result()
-    
-
-    
+    result = calc.get_result()
+    assert result == "15", "ОШИБКА?!"

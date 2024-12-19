@@ -1,20 +1,31 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from Pages.MainPageForm import MainPageForm
+import pytest
+from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 
-
-def testCalc():
+@pytest.fixture(scope="module")
+def driver():
     options = Options()
-    options.add_argument('--ignore-certificate-errors')
-    driver = webdriver.Chrome(options) 
+    options.add_argument("--ignore-certificate-errors")
+    driver = webdriver.Chrome(options=options)
+    yield driver
+    driver.quit()
+
+
+def test_Calc():
+    options = Options()
+    options.add_argument("--ignore-certificate-errors")
+    driver = webdriver.Chrome(options)
     autoform = MainPageForm(driver)
     autoform.set_cookie_policy()
     autoform.waitbyname()
     autoform.fill_form_element()
     autoform.waitbyid()
-    autoform.assert_red()
-    autoform.assert_green()
+    result = autoform.assert_red()
+    assert "danger" in result.get_attribute("class"), "Zip Красное"
+    fields = autoform.green_fields
+    for f_id in fields:
+        assert "success" in autoform.assert_green(f_id).get_attribute(
+            "class"
+        ), f"Поле {f_id} должно быть подсвечено зеленым"
