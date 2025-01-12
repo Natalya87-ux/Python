@@ -1,0 +1,12 @@
+from smartphone import Smartphone
+
+catalog = [
+    Smartphone("Apple", "iPhone 13", "+79111234567"),
+    Smartphone("Samsung", "Galaxy S21", "+79112233445"),
+    Smartphone("Xiaomi", "Redmi Note 10", "+79113332211"),
+    Smartphone("Huawei", "P40", "+79114445566"),
+    Smartphone("OnePlus", "8 Pro", "+79115556677")
+    ]
+
+for phone in catalog:
+    print(phone)
