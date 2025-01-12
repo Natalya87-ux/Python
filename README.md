@@ -38,3 +38,25 @@ with allure.step(...), что помогает в отчетности Allure.
 Шаги:
 Каждый этап теста помечен с использованием
 with allure.step(...) - Это улучшает отчетность и наглядность, показывая движение через тест.
+
+## Запуск тестов
+pytest --alluredir allure-result
+Команда запускает Allure и конвертирует результаты теста в отчет
+
+Чтобы терминал распознал команду
+allure, установите Allure Report.
+Allure Report — это утилита. Она обрабатывает результаты тестирования и создает HTML-отчет.
+## Пользователи macOS: запустите в терминале VS Code команду
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+Затем команду
+brew install allure
+## Пользователи Windows: запустите в терминале VS Code команду
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+Затем команду
+scoop install allure
+Теперь терминал распознает команду
+allure
+Введите команду ниже — сгенерируется отчет о тестах:
+allure serve allure-result
+Отчет откроется на локальном сервере в окне вашего браузера.
